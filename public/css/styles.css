@@ -1,0 +1,395 @@
+body{
+  font-family: 'Open Sans',sans-serif;
+}
+
+main,.container{
+  margin: 0;
+  padding: 0;
+  margin-left: 8px;
+}
+
+#sidebar {
+  object-fit: cover;
+  width: 75px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #FFFDD0; /* Dark background for the sidebar */
+  color: #fff; /* White text color */
+  margin: 0;
+  display: inline-block;  
+  z-index: 1;
+}
+
+#sidebar .logo img {
+  color: #fff; /* Ensure logo text is also white */
+  display: flex;
+  align-items: center; /* Aligns the logo icon and text vertically */
+}
+
+#sidebar .logo img  {
+  height: 70px; /* Size of the logo icon */
+  width: 70px;
+  object-fit: cover;
+}
+
+#sidebar .nav {
+  list-style-type: none;
+  padding: 0 6.5px 10px;
+  margin-top: 20px; /* Add some space between logo and nav items */
+  align-items: center;
+}
+
+#sidebar .nav li {
+  display: flex;
+  align-items: center; /* Aligns nav item icons and text vertically */
+  margin-bottom: 20px;
+}
+
+#sidebar .nav li:last-child {
+  border-bottom: none; /* Remove border from the last item */
+}
+
+.nav .material-icons, .material-symbols-outlined { 
+  color: #F08080;
+  font-size: 35px;  
+  padding: 10px;
+  transition-duration: 0.2s;
+}
+
+.nav .material-symbols-outlined:hover,.material-icons:hover { 
+  color: #ffffff;
+  background-color: #F08080;
+  border-radius: 13px; /* Soften the corners */
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+/* Adjustments for the navbar and its container */
+.navbar {
+  background-color: #FFFDD0;
+  overflow: hidden;
+  height: 75px; /* Adjust based on content */
+  position: fixed;
+  top: 0;
+  left: 75px;
+  right: 0;
+  display: flex;
+  justify-content: space-between; /* This will align the child divs as intended */
+  align-items: center; /* Centers items vertically */
+  padding: 0 10px; /* Adds some padding on the left and right */
+  z-index: 1;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left, .nav-center, .nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-left {
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+  padding: 10px;
+  display: flex; /* Stacks children vertically */
+  flex-direction: row; /* Assuming you want the image to stay to the right */
+  align-items: center; /* This centers items vertically in a row layout */
+}
+
+.nav-right img {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+#search-bar {
+  padding: 5px 10px;
+  width: 400px; 
+  height: 40px;
+  border: none;
+  border-radius: 10px;/* Adjust padding as necessary */
+  background-color: #F6F6F6;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+#search-bar::placeholder{
+  padding-left: 10px;
+}
+
+#nama-user, #job-user {
+  display: block;
+  line-height: 1.5;
+  margin: 0;
+  padding-right: 0; /* Or adjust as needed */
+}
+
+#nama-user{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#job-user{
+  font-size: 13px;
+  color: rgb(164, 164, 164);
+}
+
+.user-info, #nama-user, #job-user{
+  text-align: right;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns items to the left */
+  margin-right: 30px; /* Adds some space before the image */
+}
+
+.content{
+  margin-left: 61px;
+  margin-top: 68px;
+  border-radius: 25px 0 0 0; /* Add border radius to the top left corner */
+  background-color: #F6F6F6;
+  padding: 20px;
+  z-index: 2;
+  position: relative; /* Ensure z-index takes effect */
+  height: 100%;
+  width: calc(100% - 62px); /* Stretch to full width minus sidebar width */
+}
+
+.content h1{
+  margin: 0;
+  padding-top: 7px;
+}
+
+.content h3{
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 2px;
+  margin-bottom: 30px;
+}
+
+.content-list{
+  display: flex;
+}
+
+.container-content {
+  width: 230px;
+  height: 100px;
+  background-color: #fff;
+  padding-left: 15px;
+  margin-right: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-content {
+  display: flex;
+  justify-content: space-between; /* Space between text and icon */
+  align-items: flex-start; /* Align text and icon at the top */
+  position: relative;
+}
+
+.container-content .text-content {
+  display: flex;
+  flex-direction: column; /* Stack h1 and h6 vertically */
+}
+
+.container-content .icon {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F08080;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.text-content h1{
+  padding-top: 10px;
+}
+
+.text-content h6{
+  margin-top: 18px;
+  margin-bottom: 0;
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+.icon .material-symbols-outlined{
+  font-size: 24px;
+  color: #fff;
+}
+
+/* Container for the lists */
+.wrap-container {
+  display: flex;
+  gap: 30px; /* Add space between the lists */
+  padding: 20px 20px 20px 0;
+}
+
+/* Container for the list */
+.container-list {
+  background-color: #fff;
+  width: 515px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#Borrower{
+  width: 1000px;
+}
+
+#overdue-books{
+  width: 900px;
+}
+
+/* Header of the list */
+.container-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.container-list-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.container-list-header button {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.container-list-header button:hover {
+  background-color: #f0f0f0;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 15px;
+}
+
+th {
+  font-weight: bold;
+  font-size: 14px;
+  color: #666;
+  border-bottom: 1px solid #ddd;
+}
+
+td {
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* See All link */
+.see-all-container {
+  text-align: right;
+}
+
+.see-all {
+  color: #ff4b5c;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.see-all:hover {
+  text-decoration: underline;
+}
+
+
+/* Chart container */
+.container-list #chart-container {
+  width: 100%; /* Full width of the container */
+  padding: 20px;
+}
+
+/* Chart canvas */
+#myChart {
+  width: 100%;
+  height: 400px; /* Adjust height as needed */
+}
+
+.btn-custom {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-custom:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+#borrow-container{
+  margin-top: 50px;
+}
+
+#create-borrower-container{
+  margin-top: 30px;
+}
+
+.alert {
+  margin-top: 20px;
+}

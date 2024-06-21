@@ -1,0 +1,140 @@
+/* public/css/styles_auth.css */
+
+body {
+  background: url('/assets/background_image.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.auth-card {
+  width: 400px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-card .logo {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.auth-card h4 {
+  margin: 0;
+  text-align: center;
+}
+
+.auth-card p {
+  text-align: center;
+  margin: 0;
+}
+
+#teks-pertama {
+  margin-top: 10px;
+}
+
+#teks-terakhir {
+  margin-bottom: 20px;
+}
+
+.auth-card .welcome-message {
+  text-align: center;
+}
+
+.auth-card form {
+  width: 100%; /* Ensure the form takes full width */
+}
+
+.auth-card .form-group {
+  margin-bottom: 15px;
+}
+
+.auth-card .form-group label,
+.auth-card .form-group input {
+  display: block; /* Make label and input block elements */
+  width: 100%;
+}
+
+.auth-card .form-group label {
+  text-align: left; /* Align labels to the left */
+  padding-bottom: 5px; /* Add some space below the label */
+}
+
+.auth-card .btn-link {
+  color: #007bff;
+}
+
+.auth-card .text-center {
+  width: 100%; /* Ensure text-center takes full width */
+  text-align: center; /* Center the text */
+}
+
+.auth-card .text-center a {
+  color: #007bff;
+}
+
+.form-group input {
+  height: 35px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.form-group button {
+  color: white;
+  background-color: #F08080;
+  border: none;
+  width: 150px;
+  height: 35px;
+  display: block;
+  margin: 0 auto; /* Center the button */
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+#fp {
+  margin-bottom: 10px; /* Add margin-bottom to the Forgot password link */
+}
+
+#password-confirm {
+  margin-bottom: 20px;
+}
+
+#button-sp {
+  width: 200px; /* Make the button wider */
+}
+
+.alert {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+#password-field {
+  margin-bottom: 40px;
+}
