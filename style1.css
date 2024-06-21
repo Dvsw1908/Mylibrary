@@ -1,0 +1,159 @@
+#background::before {
+    background-image: url('assets/mainbg.jpg');
+    background-size: cover; /* Make the background cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center center;
+    height: 100vh;
+    filter: blur(5px);
+    z-index: -1;
+}
+#menu{
+    height: 65px;
+    width: 100%;
+    background:#804917;
+   
+}
+#logo{
+    height: 65px;
+    width: 40%;
+    background:white;
+    text-align: center;
+    line-height: 65px;
+    font-size: 40px;
+    float: left;
+}
+#menu1 {
+    height: 65px;
+    width: 60%;
+    background: white;
+    float: left;
+    display: flex;
+    align-items: center; /* Add this line to center the items vertically */
+}
+
+#menu1 ul {
+    list-style: none;
+    padding-left: 350px;
+    box-sizing: border-box;
+    margin: 0;
+    display: flex;
+    align-items: center; /* Add this line to ensure the list items are centered */
+}
+
+#menu1 LI {
+    height: 45px;
+    width: 130px;
+    text-align: center;
+    display: block;
+    float: right;
+    line-height: 45px;
+    transform: translateY(-5px);
+    color: black;
+    font-size: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+#menu1 LI:hover{
+    background: #804917;  
+    color: white; 
+    transition: all ease 1s;
+    border-radius: 3px;
+}
+#slider{
+    height: 640px;
+    width: 100%;
+    background: url(assets/mainbg.jpg);
+    background-size: cover; 
+    background-attachment: fixed;
+     /* add this line to blur the image */
+    /* animation-name: slider;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-delay: 3s; */
+}
+
+#slider > .blur {
+    filter: blur(5px);
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 60px 40px;
+    background-color: #fff;
+    padding: 10px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .book-card {
+    width: 18%;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .book-cover {
+    width: 100%;
+    height: 0;
+    padding-bottom:80%;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+    object-fit: cover;
+    margin: 0 auto;
+    display:block;
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+  }
+  
+  .book-card h2 {
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+    padding: 5px;
+    background-color: #fff;
+    border-radius: 0 0 2px 2px;
+  }
+
+  .book-title {
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+  
+  .book-summary {
+    font-size: 14px;
+    color: #666;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .book-summary.more {
+    font-size: 12px;
+    color: #999;
+    cursor: pointer;
+  }
+  
+  .book-summary.more:hover {
+    text-decoration: underline;
+  }

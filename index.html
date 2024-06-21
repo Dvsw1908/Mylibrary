@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library management system</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div id="logo">My<b style="color:#804917;">Library</b></div>
+            <div id="menu1">
+                <ul>
+                    <a href="#"><li class="fa fa-home">Home</li></a>
+                    <a href="gallery.html"><li class="fa fa-image">Gallery</li></a>
+                    <a href="#"><li id="admin-login-btn" class="fa fa-user">Admin Login</li></a>
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="background">
+        <div id="slider">
+            <div id="x">WELCOME TO MyLibrary<p style="font-size: 15px;">YOU CAN WRITE SOME TEXT</p></div> 
+            <div id="y">
+                <div id="l">
+                    <h1 style="text-align: center; color: #804917;">USER</h1>
+                    <div id="student">
+                        USER NAME <br><input type="text" class="t"/><br>
+                        PASSWORD <br><input type="text" class="t"/><br>
+                        <a href="#"><input type="submit" value="Login" style="border: none;width: 103%; height: 30px; background-color: #804917;"></a>
+                        <a href="#" id="forget-password-popup" style="color:#804917; text-decoration: none;"><p>Forget Password</p></a>
+                        <a href="#" id="register-popup" style="color:#804917; text-decoration: none;"><p>Register Here</p></a> <!-- Add this line -->
+                    </div>
+                    
+                </div>
+            </div> 
+        </div>
+        <div id="down">
+            <h3>Stay Connected</h3>
+            <a href="#" class="fa fa-facebook" style="text-decoration: none; padding: 10px 12px;color: white;"></a>
+            <a href="#" class="fa fa-instagram" style="text-decoration: none; padding: 10px 12px;color: white;"></a>
+            <a href="#" class="fa fa-twitter" style="text-decoration: none; padding: 10px 12px;color: white;"></a>
+            <h2>Contact Address</h2>
+            <a href="#" class="fa fa-home" style="text-decoration: none; padding: 10px 12px;color: white;">
+                vill : Mishra.., post : Balahi Police Station :
+            </a><br>
+            <a href="#" class="fa fa-phone" style="text-decoration: none; padding: 10px 12px;color: white;">
+                +91-7317
+            </a><br>
+            <a href="#" class="fa fa-envelope" style="text-decoration: none; padding: 10px 12px;color: white;">
+                raviverma@gmail.com
+            </a>
+        </div>
+    </div>
+
+<!-- The popup login form -->
+<div id="login-popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('login-popup')">&times;</span>
+        <h2>Admin Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Login">
+        </form>
+        <span id="error-message"></span>
+    </div>
+</div>
+
+    <!-- The popup forget password form -->
+<div id="forget-password-popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('forget-password-popup')">&times;</span>
+        <h2>Forget Password</h2>
+        <form id="forget-password-form">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <span id="forget-password-message"></span>
+    </div>
+</div>
+
+    <!-- Register Popup -->
+    <div id="register-popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('register-popup')">&times;</span>
+            <h2>Register</h2>
+            <form id="register-form">
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" name="username" required><br><br>
+                <label for="reg-email">Email:</label>
+                <input type="email" id="reg-email" name="email" required><br><br>
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="password" required><br><br>
+                <input type="submit" value="Register">
+            </form>
+            <span id="register-error-message"></span>
+        </div>
+    </div>
+</body>
+
+<script>
+    // Get the popup and login button elements
+    const loginPopup = document.getElementById('login-popup');
+    const loginBtn = document.getElementById('admin-login-btn');
+    const registerPopup = document.getElementById('register-popup');
+    const registerBtn = document.getElementById('register-btn');
+
+    // Add event listeners to the login and register buttons
+    loginBtn.addEventListener('click', () => {
+        loginPopup.style.display = 'block';
+    });
+
+    const registerLink = document.getElementById('register-link');
+
+registerLink.addEventListener('click', () => {
+    registerPopup.style.display = 'block';
+});
+
+
+    // Close popup function
+    function closePopup(popupId) {
+        document.getElementById(popupId).style.display = 'none';
+    }
+
+    //FORGOT PASSWORD
+    // Function to close popup
+function closePopup(popupId) {
+    document.getElementById(popupId).style.display = 'none';
+}
+
+// Event listener for the forget password link
+const forgetPasswordLink = document.getElementById('forget-password-link');
+const forgetPasswordPopup = document.getElementById('forget-password-popup');
+
+forgetPasswordLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    forgetPasswordPopup.style.display = 'block';
+});
+
+// Event listener for the forget password form submission
+document.getElementById('forget-password-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+
+    // TO DO: Add forget password logic here (e.g., send a request to the server to handle password reset)
+
+    // For demonstration purposes, show a message
+    document.getElementById('forget-password-message').innerHTML = 'Password reset link sent to ' + email;
+    setTimeout(() => {
+        forgetPasswordPopup.style.display = 'none';
+    }, 3000); // Hide popup after 3 seconds
+});
+
+    // Add event listener to close the popup when clicking outside of the content
+    window.addEventListener('click', (event) => {
+        if (event.target == loginPopup) {
+            loginPopup.style.display = 'none';
+        } else if (event.target == registerPopup) {
+            registerPopup.style.display = 'none';
+        }
+    });
+
+    // Add an event listener to the login form's submit button
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // TO DO: Add login logic here (e.g. send a request to a server to verify the credentials)
+
+        // For demonstration purposes, just show an error message if the credentials are invalid
+        if (username !== 'admin' || password !== 'password') {
+            document.getElementById('error-message').innerHTML = 'Invalid username or password';
+        } else {
+            // Login successful, hide the popup and redirect to a new page (e.g. a dashboard)
+            loginPopup.style.display = 'none';
+            window.location.href = 'dashboard.html';
+        }
+    });
+
+    // Add an event listener to the register form's submit button
+    document.getElementById('register-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = document.getElementById('reg-username').value;
+        const email = document.getElementById('reg-email').value;
+        const password = document.getElementById('reg-password').value;
+
+        // TO DO: Add register logic here (e.g. send a request to a server to create a new user)
+
+        // For demonstration purposes, just show a success message
+        alert('Registration successful');
+        registerPopup.style.display = 'none';
+        });
+</script>
+</body>
+</html>
+    
