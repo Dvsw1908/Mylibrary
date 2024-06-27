@@ -11,5 +11,5 @@ class Book extends Model
     // Definisi model
     use HasFactory;
 
-    protected $fillable = ['bookname', 'booktype', 'bookamount'];
+    protected $fillable = ['bookname', 'booktype', 'bookamount','image'];
 }

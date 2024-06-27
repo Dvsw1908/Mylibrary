@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+{{ env('APP_NAME') }}
+@endsection 
+
 @section('content')
 @extends('layouts.head')
 <div class="container-fluid" id="create-borrower-container">
@@ -11,6 +15,12 @@
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -35,14 +45,17 @@
                         <option value="senior highschool">Senior highschool</option>
                     </select>
                 </div>
-                <input type="hidden" name="status" value="meminjam">
+                <div class="form-group">
+                    <label for="borrowed_book">Borrowed Book</label>
+                    <input type="text" name="borrowed_book" class="form-control" required>
+                </div>
                 <div class="form-group">
                     <label for="start_time">Start Time</label>
-                    <input type="datetime-local" name="start_time" class="form-control">
+                    <input type="datetime-local" name="start_time" class="form-control" required>
                 </div>
                 <div class="form-group">
                     <label for="end_time">End Time</label>
-                    <input type="datetime-local" name="end_time" class="form-control">
+                    <input type="datetime-local" name="end_time" class="form-control" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Borrower</button>
             </form>
@@ -64,18 +77,21 @@
 
             if (value.length > 13) {
                 phoneNumberError.classList.remove('d-none');
-                phoneNumberInput.value = value.slice(0, 13).replace(/(.{4})/g, '$1-').trim('-');
-                return;
+                value = value.slice(0, 13);
             } else {
                 phoneNumberError.classList.add('d-none');
             }
 
-            // Handle backspace/delete
-            if (event.inputType === 'deleteContentBackward' && phoneNumberInput.value.endsWith('-')) {
-                value = value.slice(0, -1);
+            // Add dashes every 4 digits
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
             }
 
-            phoneNumberInput.value = value.replace(/(.{4})/g, '$1-').trim('-'); // Add dashes every 4 digits
+            phoneNumberInput.value = formattedValue;
         });
 
         borrowerForm.addEventListener('submit', function(event) {

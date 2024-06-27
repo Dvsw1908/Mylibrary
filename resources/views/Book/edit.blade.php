@@ -1,31 +1,39 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Book')
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            @include('layouts.sidebar')
+@extends('layouts.head')
+@include('layouts.sidebar')
+<div class="container" id="book-index-container">
+    <h1>Edit Book</h1>
+
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-        <div class="col-md-10">
-            <h2>Edit Book</h2>
-            <form action="{{ route('books.update', $book->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="bookname">Book Name</label>
-                    <input type="text" name="bookname" class="form-control" value="{{ $book->bookname }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="book_type">Book Type</label>
-                    <input type="text" name="book_type" class="form-control" value="{{ $book->book_type }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="book_amount">Book Amount</label>
-                    <input type="number" name="book_amount" class="form-control" value="{{ $book->book_amount }}" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Update Book</button>
-            </form>
+    @endif
+
+    <form action="{{ route('books.update', $book->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="form-group">
+            <label for="bookname">Book Name</label>
+            <input type="text" name="bookname" class="form-control" id="bookname" value="{{ $book->bookname }}">
         </div>
-    </div>
+        <div class="form-group">
+            <label for="booktype">Book Type</label>
+            <input type="text" name="booktype" class="form-control" id="booktype" value="{{ $book->booktype }}">
+        </div>
+        <div class="form-group">
+            <label for="bookamount">Book Amount</label>
+            <input type="number" name="bookamount" class="form-control" id="bookamount" value="{{ $book->bookamount }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
 </div>
 @endsection

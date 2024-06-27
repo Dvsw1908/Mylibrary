@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Edit Borrower')
+
 @section('content')
 @extends('layouts.head')
 <div class="container" id="edit-borrower-container">
@@ -12,10 +14,6 @@
             <form action="{{ route('borrowers.update', $borrower->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="borrower_id">Borrower ID</label>
-                    <input type="text" name="borrower_id" class="form-control" value="{{ $borrower->borrower_id }}" required readonly>
-                </div>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" class="form-control" value="{{ $borrower->name }}" required>
@@ -41,12 +39,16 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="borrowed_book">Borrowed Book</label>
+                    <input type="text" name="borrowed_book" class="form-control" value="{{ $borrower->borrowed_book }}" required>
+                </div>
+                <div class="form-group">
                     <label for="start_time">Start Time</label>
-                    <input type="datetime-local" name="start_time" class="form-control" value="{{ $borrower->start_time }}">
+                    <input type="datetime-local" name="start_time" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($borrower->start_time)) }}" required>
                 </div>
                 <div class="form-group">
                     <label for="end_time">End Time</label>
-                    <input type="datetime-local" name="end_time" class="form-control" value="{{ $borrower->end_time }}">
+                    <input type="datetime-local" name="end_time" class="form-control" value="{{ date('Y-m-d\TH:i', strtotime($borrower->end_time)) }}" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Update Borrower</button>
             </form>

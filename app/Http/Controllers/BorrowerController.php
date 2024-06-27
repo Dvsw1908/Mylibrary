@@ -7,67 +7,87 @@ use App\Models\Borrower;
 
 class BorrowerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $borrowers = Borrower::all();
         return view('Borrower.index', compact('borrowers'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('Borrower.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|digits_between:11,13', // Validasi panjang nomor telepon
+            'phone_number' => 'required|regex:/^[0-9-]+$/|min:11|max:16',
             'grade' => 'required|in:pre-elementary school,elementary school,junior highschool,senior highschool',
-            'start_time' => 'nullable|date',
-            'end_time' => 'nullable|date',
+            // 'status' => 'required|in:meminjam,tidak meminjam',
+            'borrowed_book' => 'required',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date',
         ]);
 
-        // Generate borrower_id
-        $lastBorrower = Borrower::orderBy('id', 'desc')->first();
-        $lastId = $lastBorrower ? intval(substr($lastBorrower->borrower_id, 2)) : 0;
-        $newId = 'br' . str_pad($lastId + 1, 4, '0', STR_PAD_LEFT);
+        $validatedData['status'] = 'meminjam';
 
-        $borrower = new Borrower();
-        $borrower->borrower_id = $newId;
-        $borrower->name = $request->name;
-        $borrower->phone_number = $request->phone_number;
-        $borrower->grade = $request->grade;
-        $borrower->status = 'meminjam'; // Set status to "meminjam"
-        $borrower->start_time = $request->start_time;
-        $borrower->end_time = $request->end_time;
-        $borrower->save();
+        Borrower::create($validatedData);
 
-        return redirect()->route('borrowers.index')->with('success', 'Borrower has been successfully added.');
+        return redirect()->route('borrowers.index')->with('success', 'Borrower created successfully.');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     * @param  \App\Models\Borrower  $borrower
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Borrower $borrower)
     {
         return view('Borrower.edit', compact('borrower'));
     }
 
+    /**
+     * Update the specified resource in storage.
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Borrower  $borrower
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Borrower $borrower)
     {
-        $request->validate([
-            'borrower_id' => 'required|unique:borrowers,borrower_id,' . $borrower->id,
+        $validatedData = $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|digits_between:11,13', // Validasi panjang nomor telepon
+            'phone_number' => 'required|regex:/^[0-9-]+$/|min:11|max:13',
             'grade' => 'required|in:pre-elementary school,elementary school,junior highschool,senior highschool',
             'status' => 'required|in:meminjam,tidak meminjam',
-            'start_time' => 'nullable|date',
-            'end_time' => 'nullable|date',
+            'borrowed_book' => 'required',
+            'start_time' => 'required|date',
+            'end_time' => 'required|date',
         ]);
 
-        $borrower->update($request->all());
+        $borrower->update($validatedData);
 
         return redirect()->route('borrowers.index')->with('success', 'Borrower updated successfully.');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * @param  \App\Models\Borrower  $borrower
+     * @return \Illuminate\Http\Response
+     */
     public function destroy(Borrower $borrower)
     {
         $borrower->delete();

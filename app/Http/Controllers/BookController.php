@@ -4,67 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
-use App\Models\Borrower;
 
 class BookController extends Controller
 {
     public function index()
     {
-        \Log::info('BookController index method called'); // Debugging
         $books = Book::all();
-        \Log::info('Books:', $books->toArray()); // Debugging
-        return view('books.index', compact('books'));
+        return view('Book.index', compact('books'));
     }
-    
 
     public function create()
     {
-        return view('books.create');
+        return view('Book.create');
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'bookname' => 'required',
-            'book_type' => 'required',
-            'book_amount' => 'required|integer',
+            'booktype' => 'required',
+            'bookamount' => 'required|numeric',
         ]);
 
-        Book::create($request->all());
+        Book::create($validatedData);
 
-        return redirect()->route('books.index')
-            ->with('success', 'Book created successfully.');
-    }
-
-    public function show(Book $book)
-    {
-        return view('books.show', compact('book'));
+        return redirect()->route('books.index')->with('success', 'Book created successfully.');
     }
 
     public function edit(Book $book)
     {
-        return view('books.edit', compact('book'));
+        return view('Book.edit', compact('book'));
     }
 
     public function update(Request $request, Book $book)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'bookname' => 'required',
-            'book_type' => 'required',
-            'book_amount' => 'required|integer',
+            'booktype' => 'required',
+            'bookamount' => 'required|numeric',
         ]);
 
-        $book->update($request->all());
+        $book->update($validatedData);
 
-        return redirect()->route('books.index')
-            ->with('success', 'Book updated successfully.');
+        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
     }
 
     public function destroy(Book $book)
     {
         $book->delete();
-
-        return redirect()->route('books.index')
-            ->with('success', 'Book deleted successfully.');
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully.');
     }
 }

@@ -4,11 +4,7 @@
         <div class="nav-left">
             <span id="judul" style="font-weight: bold; font-size: 18px;">Mylibrary</span>
         </div>
-        
-        <!-- Center-aligned items -->
-        <div class="nav-center">
-            <input id="search-bar" type="text" placeholder="Search...">
-        </div>
+
         
         <!-- Right-aligned items -->
         <div class="nav-right">

@@ -48,16 +48,16 @@
             </div>
             <table>
                 <tr>
-                    <th>Book ID</th>
-                    <th>Title</th>
+                    <th>Book Name</th>
+                    <th>Book Type</th>
                     <th>Amount</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($books as $book)
                 <tr>
-                    <td>{{ $book->id }}</td>
-                    <td>{{ $book->title }}</td>
-                    <td>{{ $book->amount }}</td>
+                    <td>{{ $book->bookname }}</td>
+                    <td>{{ $book->booktype }}</td>
+                    <td>{{ $book->bookamount }}</td>
                     <td>
                         <a href="{{ route('books.edit', $book->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline;">
@@ -80,20 +80,20 @@
             </div>
             <table>
                 <tr>
-                    <th>Borrower ID</th>
                     <th>Borrower Name</th>
                     <th>Borrower Phone Number</th>
                     <th>Borrower Status</th>
                     <th>Borrower Grade</th>
+                    <th>Borrowed Book</th>
                     <th>Action</th>
                 </tr>
                 @foreach ($borrowers as $borrower)
                 <tr>
-                    <td>{{ str_pad($borrower->id, 4, '0', STR_PAD_LEFT) }}</td>
                     <td>{{ $borrower->name }}</td>
                     <td>{{ $borrower->phone_number }}</td>
                     <td>{{ $borrower->status }}</td>
                     <td>{{ $borrower->grade }}</td>
+                    <td>{{ $borrower->borrowed_book }}</td>
                     <td>
                         <a href="{{ route('borrowers.edit', $borrower->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('borrowers.destroy', $borrower->id) }}" method="POST" style="display:inline;">
@@ -117,45 +117,40 @@
             </div>
             <table>
                 <tr>
-                    <th>Borrower ID</th>
                     <th>Borrower Name</th>
-                    <th>Book ID</th>
-                    <th>Title</th>
+                    <th>Borrower Phone Number</th>
+                    <th>Borrower Grade</th>
+                    <th>Borrowed Book</th>
                     <th>Overdue</th>
                     <th>Status</th>
-                    <th>Action</th>
                 </tr>
-                @foreach ($overdueBooks as $overdueBook)
+                @foreach ($overdueBooks as $borrower)
                 @php
-                    $overdueDays = \Carbon\Carbon::now()->diffInDays($overdueBook->end_time);
+                    $endTime = \Carbon\Carbon::parse($borrower->end_time);
+                    $now = \Carbon\Carbon::now();
+                    $overdueDays = $now->diffInDays($endTime, false);
                 @endphp
                 <tr>
-                    <td>{{ $overdueBook->borrower_id }}</td>
-                    <td>{{ $overdueBook->name }}</td>
-                    <td>{{ $overdueBook->book->id }}</td>
-                    <td>{{ $overdueBook->book->bookname }}</td>
-                    <td>{{ $overdueDays }} days</td>
-                    <td>{{ $overdueBook->status }}</td>
-                    <td>
-                        <a href="{{ route('borrowers.edit', $overdueBook->id) }}" class="btn btn-warning">Edit</a>
-                        <form action="{{ route('borrowers.destroy', $overdueBook->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
+                    <td>{{ $borrower->name }}</td>
+                    <td>{{ $borrower->phone_number }}</td>
+                    <td>{{ $borrower->grade }}</td>
+                    <td>{{ $borrower->borrowed_book }}</td>
+                    <td>{{ $borrower->overdue_days }} days</td>
+                    <td>{{ $borrower->status }}</td>
                 </tr>
                 @endforeach
             </table>
-            <div class="see-all-container">
-                <a href="#" class="see-all">See All</a>
+            <div class="pagination-container">
+                {{ $overdueBooks->links('vendor.pagination.custom') }}
             </div>
         </div>
-        <div class="container-list" id="chart-container">
-            <div class="container-list-header">
-                <h2>Borrowers Statistics</h2>
+        <div class="wrap-container" id="statistics-container">
+            <div class="container-list" id="chart-container">
+                <div class="container-list-header">
+                    <h2>Borrowers Statistics</h2>
+                </div>
+                <canvas id="borrowerChart"></canvas>
             </div>
-            <canvas id="borrowerChart" width="400" height="200"></canvas>
         </div>
     </div>
 </div>

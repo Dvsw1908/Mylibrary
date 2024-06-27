@@ -393,3 +393,71 @@ tr:last-child td {
 .alert {
   margin-top: 20px;
 }
+
+#book-index-container{
+  margin-top: 50px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 60px;
+}
+
+/* Container for the statistics */
+#statistics-container {
+  display: flex;
+  gap: 30px; /* Add space between the lists */
+  padding: 20px 20px 20px 0;
+}
+
+/* Container for the chart */
+#chart-container {
+  background-color: #fff;
+  width: 100%; /* Make it take full width */
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the canvas takes full width and height */
+#chart-container canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a,
+.pagination li span {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #007bff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.pagination li.active span {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.pagination li.disabled span {
+  color: #777;
+  cursor: not-allowed;
+}
+
+.pagination li a:hover {
+  background-color: #ddd;
+}

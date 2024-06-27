@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
-@section('title')
-{{ env('APP_NAME') }} | Borrower List
-@endsection 
+@section('title', 'Borrower List')
 
 @section('content')
 @extends('layouts.head')
@@ -15,6 +13,7 @@
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             <div class="d-flex justify-content-between align-items-center mb-3" id="borrow-container">
@@ -27,11 +26,13 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Borrower ID</th>
                                 <th>Name</th>
                                 <th>Phone Number</th>
                                 <th>Grade</th>
                                 <th>Status</th>
+                                <th>Borrowed Book</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,11 +40,13 @@
                             @foreach ($borrowers as $key => $borrower)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $borrower->borrower_id }}</td>
                                 <td>{{ $borrower->name }}</td>
                                 <td>{{ $borrower->phone_number }}</td>
                                 <td>{{ $borrower->grade }}</td>
                                 <td>{{ $borrower->status }}</td>
+                                <td>{{ $borrower->borrowed_book }}</td>
+                                <td>{{ $borrower->start_time }}</td>
+                                <td>{{ $borrower->end_time }}</td>
                                 <td>
                                     <a href="{{ route('borrowers.edit', $borrower->id) }}" class="btn btn-warning">Edit</a>
                                     <form action="{{ route('borrowers.destroy', $borrower->id) }}" method="POST" style="display:inline;">
