@@ -20,7 +20,8 @@
                 </div>
                 <div class="form-group">
                     <label for="phone_number">Phone Number</label>
-                    <input type="text" name="phone_number" class="form-control" value="{{ $borrower->phone_number }}" required>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" required>
+                    <small id="phone_number_error" class="text-danger d-none">Phone number must be between 11 and 13 digits.</small>
                 </div>
                 <div class="form-group">
                     <label for="grade">Grade</label>
@@ -55,4 +56,47 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const phoneNumberInput = document.getElementById('phone_number');
+        const borrowerForm = document.getElementById('borrowerForm');
+        const phoneNumberError = document.getElementById('phone_number_error');
+
+        phoneNumberInput.addEventListener('input', function(event) {
+            let value = phoneNumberInput.value.replace(/-/g, ''); // Remove existing dashes
+
+            // Only allow numbers
+            value = value.replace(/\D/g, '');
+
+            if (value.length > 13) {
+                phoneNumberError.classList.remove('d-none');
+                value = value.slice(0, 13);
+            } else {
+                phoneNumberError.classList.add('d-none');
+            }
+
+            // Add dashes every 4 digits
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += '-';
+                }
+                formattedValue += value[i];
+            }
+
+            phoneNumberInput.value = formattedValue;
+        });
+
+        borrowerForm.addEventListener('submit', function(event) {
+            const phoneNumber = phoneNumberInput.value.replace(/-/g, ''); // Remove dashes for validation
+            if (phoneNumber.length < 11 || phoneNumber.length > 13) {
+                event.preventDefault();
+                phoneNumberError.classList.remove('d-none');
+            } else {
+                phoneNumberError.classList.add('d-none');
+            }
+        });
+    });
+</script>
 @endsection

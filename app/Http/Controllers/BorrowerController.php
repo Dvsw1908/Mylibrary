@@ -70,7 +70,7 @@ class BorrowerController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|regex:/^[0-9-]+$/|min:11|max:13',
+            'phone_number' => 'required|regex:/^[0-9-]+$/|min:11|max:16',
             'grade' => 'required|in:pre-elementary school,elementary school,junior highschool,senior highschool',
             'status' => 'required|in:meminjam,tidak meminjam',
             'borrowed_book' => 'required',
